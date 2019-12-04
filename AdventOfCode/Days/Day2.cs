@@ -3,7 +3,7 @@ using System.IO;
 
 namespace AdventOfCode.Days
 {
-    public class Day2 : Day<int, int>
+    public class Day2 : Day<int[], int>
     {
         protected override int[] ReadInput(string inputPath)
         {

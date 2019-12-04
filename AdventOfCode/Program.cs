@@ -20,7 +20,7 @@ namespace AdventOfCode
 			}
 			else
 			{
-				dayName = "3";
+				dayName = "4";
 			}
 			
 			var dayType = typeof(Program).Assembly.GetType($"AdventOfCode.Days.Day{dayName}", false);

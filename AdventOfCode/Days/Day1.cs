@@ -1,8 +1,9 @@
 using System;
+using System.IO;
 
 namespace AdventOfCode.Days
 {
-	public class Day1 : Day<int, int>
+	public class Day1 : Day<int[], int>
 	{
 		public override int Puzzle1()
 		{
@@ -40,6 +41,21 @@ namespace AdventOfCode.Days
 
 			return totalFuel;
 		}
+
+		protected override int[] ReadInput(string inputPath)
+		{
+			var stringArray = File.ReadAllLines(inputPath);
+					
+			var input = new int[stringArray.Length];
+					
+			for (var i = 0; i < input.Length; i++)
+			{
+				input[i] = Convert.ToInt32(stringArray[i]);
+			}
+
+			return input;
+		}
+
 
 		private static int FuelForMass(int mass)
 		{

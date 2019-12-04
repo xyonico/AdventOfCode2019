@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AdventOfCode.Days
 {
-    public class Day3 : Day<Wire, int>
+    public class Day3 : Day<Wire[], int>
     {
         public override int Puzzle1()
         {
