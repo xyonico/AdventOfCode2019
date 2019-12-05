@@ -11,7 +11,7 @@ namespace AdventOfCode
 		{
 			get
 			{
-				if (default(TInput) == null && _input.Equals(null) || default(TInput) != null && _input.Equals(default(TInput)))
+				if (default(TInput) == null && _input == null || default(TInput) != null && _input.Equals(default(TInput)))
 				{
 					var typeName = GetType().Name;
 					var number = typeName.Substring(3);

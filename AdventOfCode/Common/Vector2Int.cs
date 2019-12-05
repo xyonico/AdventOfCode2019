@@ -1,7 +1,6 @@
 using System;
-using System.Numerics;
 
-namespace AdventOfCode
+namespace AdventOfCode.Common
 {
     public struct Vector2Int : IEquatable<Vector2Int>
     {

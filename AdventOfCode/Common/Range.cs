@@ -1,4 +1,4 @@
-namespace AdventOfCode
+namespace AdventOfCode.Common
 {
 	public struct Range<T> where T : struct
 	{
