@@ -31,9 +31,9 @@ namespace AdventOfCode.Days
 				return _lastOutputThrust;
 			}
 
-			void OutputHandler(AutoOutputOp sender, int output)
+			void OutputHandler(AutoOutputOp sender, long output)
 			{
-				_lastOutputThrust = output;
+				_lastOutputThrust = (int) output;
 			}
 
 			for (var i = 0; i < amplifierCount; i++)
@@ -109,9 +109,9 @@ namespace AdventOfCode.Days
 				return _lastOutputThrust;
 			}
 
-			void OutputHandler(AutoOutputOp sender, int output)
+			void OutputHandler(AutoOutputOp sender, long output)
 			{
-				_lastOutputThrust = output;
+				_lastOutputThrust = (int) output;
 				_currentComputerIndex++;
 
 				if (_currentComputerIndex >= amplifierCount)

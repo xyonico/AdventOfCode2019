@@ -5,29 +5,32 @@ namespace AdventOfCode.Common.Intcode
 {
 	public class IntcodeComputer
 	{
-		private readonly int[] _memory;
-		private readonly int[] _op = new int[5];
+		private readonly long[] _memory;
+		private readonly long[] _op = new long[5];
 		private readonly Dictionary<int, IOperation> _operations;
 
 		private int _currentAddress;
+		private bool _didJump;
 
 		public IntcodeComputer(int memoryCapacity, Dictionary<int, IOperation> operations)
 		{
-			_memory = new int[memoryCapacity];
+			_memory = new long[memoryCapacity];
 			_operations = operations;
 		}
 
-		public int this[int address]
+		public long this[int address]
 		{
 			get { return _memory[address]; }
 			set { _memory[address] = value; }
 		}
 
 		public int MemoryCapacity => _memory.Length;
+		public int RelativeBaseAddress { get; set; }
 
 		public void SetCurrentAddress(int address)
 		{
 			_currentAddress = address;
+			_didJump = true;
 		}
 
 		public bool Tick()
@@ -40,7 +43,7 @@ namespace AdventOfCode.Common.Intcode
 
 			if (opCode == 99) return false;
 
-			if (!_operations.TryGetValue(opCode, out var operation))
+			if (!_operations.TryGetValue((int) opCode, out var operation))
 			{
 				throw new NotImplementedException();
 			}
@@ -52,23 +55,25 @@ namespace AdventOfCode.Common.Intcode
 				var mode = _op[i + 2];
 
 				var parameter = _memory[_currentAddress + i + 1];
-				var parameterValue = mode switch
+				var parameterAddress = mode switch
 				{
 					// Position mode.
 					0 => parameter,
 					// Immediate mode.
 					1 => _currentAddress + i + 1,
+					// Relative mode.
+					2 => RelativeBaseAddress + parameter,
 					_ => throw new NotImplementedException()
 				};
 
-				parameters[i] = parameterValue;
+				parameters[i] = (int) parameterAddress;
 			}
 
-			var prevAddress = _currentAddress;
+			_didJump = false;
 			
 			operation.Run(parameters, this);
 
-			if (prevAddress == _currentAddress)
+			if (!_didJump)
 			{
 				_currentAddress += parameters.Count + 1;
 			}
@@ -76,7 +81,7 @@ namespace AdventOfCode.Common.Intcode
 			return true;
 		}
 
-		private void SplitToArray(int num, int[] array)
+		private void SplitToArray(long num, long[] array)
 		{
 			for (var i = 0; i < array.Length; i++)
 			{
@@ -85,7 +90,7 @@ namespace AdventOfCode.Common.Intcode
 			}
 		}
 
-		private int GetOpCode()
+		private long GetOpCode()
 		{
 			return _op[0] + _op[1] * 10;
 		}

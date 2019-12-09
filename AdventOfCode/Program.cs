@@ -7,7 +7,7 @@ namespace AdventOfCode
 		private static void Main(string[] args)
 		{
 			string dayName;
-			byte part = 2;
+			byte part = 1;
 
 			if (args.Length > 0)
 			{
@@ -20,7 +20,7 @@ namespace AdventOfCode
 			}
 			else
 			{
-				dayName = "8";
+				dayName = "9";
 			}
 			
 			var dayType = typeof(Program).Assembly.GetType($"AdventOfCode.Days.Day{dayName}", false);

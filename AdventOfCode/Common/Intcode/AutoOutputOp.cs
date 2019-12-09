@@ -2,7 +2,7 @@ namespace AdventOfCode.Common.Intcode
 {
 	public class AutoOutputOp : IOperation
 	{
-		public delegate void OutputHandler(AutoOutputOp sender, int output);
+		public delegate void OutputHandler(AutoOutputOp sender, long output);
 
 		private readonly OutputHandler _outputHandler;
 		

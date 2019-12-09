@@ -8,7 +8,7 @@ namespace AdventOfCode.Common.Intcode
 		{
 			if (computer[parameters.Param1] != 0)
 			{
-				computer.SetCurrentAddress(computer[parameters.Param2]);
+				computer.SetCurrentAddress((int) computer[parameters.Param2]);
 			}
 		}
 	}
